@@ -1,7 +1,7 @@
-from pyfirmata import Arduino, SERVO, util
 from time import sleep
-from serial import Serial
+from pyfirmata import Arduino, SERVO, util
 
+# Github Test
 port = 'COM3'
 pin = 9
 board = Arduino(port)
@@ -37,4 +37,3 @@ while True:
     if its_int:
         rotate_servo(pin, user_angle)
         sleep(0.15)
-
