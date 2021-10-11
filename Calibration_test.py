@@ -3,11 +3,12 @@ from pyfirmata import Arduino, SERVO, util
 
 # Github Test
 # Ahmed bagasi
+# Yousef
 port = 'COM3'
-pin = 9
+pin = 9 #??
 board = Arduino(port)
 board.digital[pin].mode = SERVO
-pin9 = board.get_pin('d:9:s')
+pin9 = board.get_pin('d:9:s') #??
 
 
 # First method to move the servo
