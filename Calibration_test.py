@@ -1,15 +1,14 @@
 from time import sleep
 from pyfirmata import Arduino, SERVO, util
 
-# Github Test
-# Ahmed bagasi
-# Yousef
-# Zabbani
+# Q1 Base from 0 to 180 degrees
+# Q2
+# Q3 Horizental Arm from 0 to 119 Degrees
 port = 'COM3'
-pin = 9 #??
+pin = 9
 board = Arduino(port)
 board.digital[pin].mode = SERVO
-pin9 = board.get_pin('d:9:s') #??
+pin9 = board.get_pin('d:9:s')
 
 
 # First method to move the servo
@@ -25,7 +24,7 @@ def move_servo(angle):
 rotate_servo(pin, 90)
 
 while True:
-    # Reads and handles data from the microcontroller over the serial port. This method
+    # Reads and handles data from the microcontroller over th-e serial port. This method
     # should be called in a
     # main loop or in an Iterator instance to keep this boards pin values up to date
     iter8 = util.Iterator(board)
