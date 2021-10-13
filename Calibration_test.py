@@ -4,7 +4,8 @@ from pyfirmata import Arduino, SERVO, util
 # Q1 Base from 0 to 180 degrees
 # Q2
 # Q3 Horizental Arm from 0 to 119 Degrees
-port = 'COM3'
+# EE Open (90 - 60), Close depends on the box width
+port = 'COM4'
 pin = 9
 board = Arduino(port)
 board.digital[pin].mode = SERVO
