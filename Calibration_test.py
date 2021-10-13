@@ -5,6 +5,9 @@ from pyfirmata import Arduino, SERVO, util
 # Q2
 # Q3 Horizental Arm from 0 to 119 Degrees
 # EE Open (90 - 60), Close depends on the box width
+# Q1 PWM 9
+# Q3 PWM 3
+# Q2 PWM 6
 port = 'COM4'
 pin = 9
 board = Arduino(port)
