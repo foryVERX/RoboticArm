@@ -1,4 +1,4 @@
-import pyfirmata
+from pyfirmata import Arduino, SERVO, util
 from time import sleep
 
 port = 'COM4'
