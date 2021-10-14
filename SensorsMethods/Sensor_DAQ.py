@@ -9,11 +9,13 @@ def getValues():
     arduinoData = ser.readline().decode('ascii')
     return arduinoData
 
+def get_ir_data():
+    ir_data = []
+    for i in range(10):
+        time.sleep(0.1)
+        value = getValues()
+        ir_data.append(value)
+    return ir_data[9]
 
-while (1):
 
-    userInput = 'y'
-
-    if userInput == 'y':
-        print(getValues())
-        time.sleep(1)
+get_ir_data()
