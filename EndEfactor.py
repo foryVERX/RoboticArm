@@ -17,9 +17,10 @@ def close_ee(angle):
 
 
 # Open angle is in range 90 - 60
+# Close angle is 50
 open_ee(90)
 sleep(0.15)
-# close angle depends in the width
-close_ee(39)
-sleep(0.15)
+close_ee(50)
+sleep(2)
 open_ee(90)
+
