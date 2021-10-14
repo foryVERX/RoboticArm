@@ -1,9 +1,10 @@
 from time import sleep
 from pyfirmata import Arduino, SERVO, util
 
-# Q1 Base from 0 to 180 degrees
-# Q2
-# Q3 Horizental Arm from 0 to 119 Degrees
+# Q1 Base from Default Pos is 90 Deg
+# Q2 Main Arm Default Pos is 90 Deg
+# Q3 Horizental Default Pos is 45 Deg
+
 # EE Open (90 - 60), Close depends on the box width
 # Q1 PWM 9
 # Q3 PWM 3
