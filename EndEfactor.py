@@ -12,7 +12,7 @@ def open_ee(angle):
     pin9.write(angle)
 
 # close the end efactor function
-def close_ee(pin, angle):
+def close_ee(angle):
     pin9.write(angle)
 
 
