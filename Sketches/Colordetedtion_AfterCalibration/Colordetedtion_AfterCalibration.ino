@@ -1,13 +1,3 @@
-/*
-  RGB Color Sensor Demonstration
-  rgb-color-sensor-demo.ino
-  Read RGB values from Color Sensor
-  Must use calibration values from Color Sensor Calibration Sketch
-
-  DroneBot Workshop 2020
-  https://dronebotworkshop.com
-*/
-
 // Define color sensor pins
 
 #define S0 4
@@ -27,18 +17,18 @@ int greenMax = 612; // Green maximum value
 int blueMin = 20; // Blue minimum value
 int blueMax = 476; // Blue maximum value
 
-// Variables for Color Pulse Width Measurements
-
+// Define functions
+int outputToSerialPort();
 int getRedPW();
 int getGreenPW();
 int getBluePW();
 
+// Variables for Color Pulse Width Measurements
 int redPW = 0;
 int greenPW = 0;
 int bluePW = 0;
 
 // Variables for final Color values
-
 int redValue;
 int greenValue;
 int blueValue;
@@ -64,45 +54,47 @@ void setup() {
 }
 
 void loop() {
+    //userInput = Serial.read();        
+  // Only  request data if requested by user
+  outputToSerialPort();
+}
 
-  // Read Red value
+
+int outputToSerialPort() {
+    if(Serial.available()> 0){
+    userInput = Serial.read();               // read user input
+      if(userInput == 'c'){
+          // Read Red value
     redPW = getRedPW();
     // Map to value from 0-255
     redValue = map(redPW, redMin,redMax,255,0);
     // Delay to stabilize sensor
-    delay(200);
+    delay(100);
     
     // Read Green value
     greenPW = getGreenPW();
     // Map to value from 0-255
     greenValue = map(greenPW, greenMin,greenMax,255,0);
     // Delay to stabilize sensor
-    delay(200);
+    delay(100);
     
     // Read Blue value
     bluePW = getBluePW();
     // Map to value from 0-255
     blueValue = map(bluePW, blueMin,blueMax,255,0);
     // Delay to stabilize sensor
-    delay(200);
-    userInput = Serial.read();        
-  // Only  request data if requested by user
-  if(Serial.available()> 0){
-                   // read user input
-      if(userInput == 'g'){                  // if we get expected value
+    delay(100);
+    // Print output to Serial Monitor   
 
-           // Print output to Serial Monitor
-            Serial.print("Red=");
-            Serial.print(redValue);
-            Serial.print(" Green=");
-            Serial.print(greenValue);
-            Serial.print(" Blue=");
-            Serial.println(blueValue);
-            }
+    Serial.print("R");
+    Serial.print(redValue);
+    Serial.print("G");
+    Serial.print(greenValue);
+    Serial.print("B");
+    Serial.print(blueValue);
+      }
   }
 }
-
-
 // Function to read Red Pulse Widths
 int getRedPW() {
 
