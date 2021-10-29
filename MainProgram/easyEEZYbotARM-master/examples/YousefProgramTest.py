@@ -49,6 +49,7 @@ myArduino.communicate(data=myArduino.composeMessage(servoAngle_q1=servoAngle_q1,
                                                     servoAngle_EE=servoAngle_EE_open))
 
 
+# Approximate MainHome Position x=192 y=136 z=122
 # Assign new cartesian position where we want the robot arm end effector to move to
 # (x,y,z in mm from centre of robot base)
 x = 160  # mm
