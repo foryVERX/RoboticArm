@@ -33,7 +33,7 @@ myArduino.openSerialPort()
 
 # Initialise kinematic model with initial joint angles (home position)
 myVirtualRobotArm = EEZYbotARM_Mk2(
-    initial_q1=0, initial_q2=90, initial_q3=-135)
+    initial_q1=0, initial_q2=90, initial_q3=-130)
 # Plot it
 myVirtualRobotArm.plot()
 
@@ -53,9 +53,9 @@ myArduino.communicate(data=myArduino.composeMessage(servoAngle_q1=servoAngle_q1,
 
 # Assign new cartesian position where we want the robot arm end effector to move to
 # (x,y,z in mm from centre of robot base)
-x = 10  # mm
-y = 10  # mm
-z = 10  # mm
+x = 0  # mm
+y = 0  # mm
+z = 0 # mm
 
 # Compute inverse kinematics
 a1, a2, a3 = myVirtualRobotArm.inverseKinematics(x, y, z)
@@ -68,15 +68,16 @@ myVirtualRobotArm.updateJointAngles(q1=a1, q2=a2, q3=a3)
 myVirtualRobotArm.plot()
 
 # Calculate the current servo angles
+
 servoAngle_q1, servoAngle_q2, servoAngle_q3 = myVirtualRobotArm.map_kinematicsToServoAngles()
 print("TEST", servoAngle_q1)
 
+time.sleep(2)
 # Send the movement command to the arduino. The physical EEZYbotARM will move to this position
 myArduino.communicate(data=myArduino.composeMessage(servoAngle_q1=servoAngle_q1,
                                                     servoAngle_q2=servoAngle_q2,
                                                     servoAngle_q3=servoAngle_q3,
                                                     servoAngle_EE=servoAngle_EE_open))
 
-time.sleep(5)
 # Close the serial port
 myArduino.closeSerialPort()

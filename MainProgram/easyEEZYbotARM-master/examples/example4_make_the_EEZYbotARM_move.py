@@ -27,10 +27,7 @@ testData.append(myArduino.composeMessage(servoAngle_q1=90,
                                          servoAngle_q3=90,
                                          servoAngle_EE=90))
 
-testData.append(myArduino.composeMessage(servoAngle_q1=90,
-                                         servoAngle_q2=80,
-                                         servoAngle_q3=80,
-                                         servoAngle_EE=90))
+
 
 
 # The connection should be managed in this sequence (will be simplified in future)

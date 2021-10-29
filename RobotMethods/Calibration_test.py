@@ -9,7 +9,7 @@ from pyfirmata import Arduino, SERVO, util
 # Q1 PWM 9
 # Q3 PWM 3
 # Q2 PWM 6
-port = 'COM4'
+port = 'COM3'
 pin = 9
 board = Arduino(port)
 board.digital[pin].mode = SERVO

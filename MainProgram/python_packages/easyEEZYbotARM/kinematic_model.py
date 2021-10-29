@@ -1101,9 +1101,9 @@ class EEZYbotARM_Mk2(EEZYbotARM):
     LB3 = 60
 
     # Joint limits
-    q1_min = 0  # degrees
+    q1_min = -180  # degrees
     q1_max = 180
-    q2_min = 0
+    q2_min = -180
     q2_max = 180
     # q3_min, q3_max are given by q3CalcLimits() function
 

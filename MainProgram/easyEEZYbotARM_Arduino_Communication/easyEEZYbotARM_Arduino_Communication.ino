@@ -1,4 +1,5 @@
 
+
 /*
    ~~~~~Prerequisites~~~~~
    ServoEasing.h (https://github.com/ArminJo/ServoEasing) -> Just a fantastic library! wow :)
@@ -35,7 +36,9 @@
 // include these libraries for using the servo add on board. Taken from servo example code
 #include <Arduino.h>
 // include this library for servo easing functionality
-#include "ServoEasing.hpp"
+#include <ServoEasing.h>
+
+
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
   Definitions                                                                    *
