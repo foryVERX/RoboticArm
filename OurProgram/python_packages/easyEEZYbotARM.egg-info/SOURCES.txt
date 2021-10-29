@@ -1,0 +1,10 @@
+README.md
+setup.py
+python_packages/easyEEZYbotARM/__init__.py
+python_packages/easyEEZYbotARM/kinematic_model.py
+python_packages/easyEEZYbotARM/serial_communication.py
+python_packages/easyEEZYbotARM.egg-info/PKG-INFO
+python_packages/easyEEZYbotARM.egg-info/SOURCES.txt
+python_packages/easyEEZYbotARM.egg-info/dependency_links.txt
+python_packages/easyEEZYbotARM.egg-info/requires.txt
+python_packages/easyEEZYbotARM.egg-info/top_level.txt
