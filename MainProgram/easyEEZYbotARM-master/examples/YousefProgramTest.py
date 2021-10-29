@@ -33,7 +33,7 @@ myArduino.openSerialPort()
 
 # Initialise kinematic model with initial joint angles (home position)
 myVirtualRobotArm = EEZYbotARM_Mk2(
-    initial_q1=0, initial_q2=90, initial_q3=45)
+    initial_q1=0, initial_q2=90, initial_q3=-135)
 
 # Define end effector open and closed angle
 servoAngle_EE_closed = 60
@@ -48,12 +48,12 @@ myArduino.communicate(data=myArduino.composeMessage(servoAngle_q1=servoAngle_q1,
                                                     servoAngle_q3=servoAngle_q3,
                                                     servoAngle_EE=servoAngle_EE_open))
 
-time.sleep(5)
+
 # Assign new cartesian position where we want the robot arm end effector to move to
 # (x,y,z in mm from centre of robot base)
-x = 0  # mm
+x = 160  # mm
 y = 0  # mm
-z = 0  # mm
+z = 25  # mm
 
 # Compute inverse kinematics
 a1, a2, a3 = myVirtualRobotArm.inverseKinematics(x, y, z)
@@ -65,7 +65,7 @@ print(
 
 # Visualise the new joint angles
 myVirtualRobotArm.updateJointAngles(q1=a1, q2=a2, q3=a3)
-myVirtualRobotArm.plot()
+#myVirtualRobotArm.plot()
 
 # Calculate the current servo angles
 servoAngle_q1, servoAngle_q2, servoAngle_q3 = myVirtualRobotArm.map_kinematicsToServoAngles()
