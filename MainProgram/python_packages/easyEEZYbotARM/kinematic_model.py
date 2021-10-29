@@ -1101,10 +1101,10 @@ class EEZYbotARM_Mk2(EEZYbotARM):
     LB3 = 60
 
     # Joint limits
-    q1_min = -30  # degrees
-    q1_max = 30
-    q2_min = 39
-    q2_max = 120
+    q1_min = 0  # degrees
+    q1_max = 180
+    q2_min = 0
+    q2_max = 180
     # q3_min, q3_max are given by q3CalcLimits() function
 
     def q3CalcLimits(self, **kwargs):
@@ -1125,8 +1125,8 @@ class EEZYbotARM_Mk2(EEZYbotARM):
         q2 = kwargs.get('q2', self.q2)
 
         # calculate q3 min limits in degrees
-        q3_min = (-0.6755 * q2) - 70.768
-        q3_max = (-0.7165 * q2) - 13.144
+        q3_min = -180
+        q3_max = 180
 
         return q3_min, q3_max
 
@@ -1164,7 +1164,7 @@ class EEZYbotARM_Mk2(EEZYbotARM):
         self.checkErrorJointLimits(q1=q1, q2=q2, q3=q3)
 
         # Calculate for q1
-        servoAngle_q1 = ((-2.0497)*q1) + 91.726  # from experimentation !
+        servoAngle_q1 = q1 + 90  # from experimentation !
         servoAngle_q1 = round(servoAngle_q1, 2)
 
         # Calculate for q2
@@ -1269,7 +1269,7 @@ class EEZYbotARM_Mk1(EEZYbotARM):
         self.checkErrorJointLimits(q1=q1, q2=q2, q3=q3)
 
         # Calculate for q1
-        servoAngle_q1 = ((-2.0497)*q1) + 91.726  # from experimentation !
+        servoAngle_q1 = q1 + 90  # from experimentation !
         servoAngle_q1 = round(servoAngle_q1, 2)
 
         # Calculate for q2
