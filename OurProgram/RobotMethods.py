@@ -63,5 +63,11 @@ def GoToXyZ(x, y, z):
                                                         servoAngle_q3=servoAngle_q3))
 
 
+GoToXyZ(-12, 0, 40)
+time.sleep(2)
+GoToXyZ(-12, -200, 40)
+time.sleep(2)
+GoToMainHomePosition()
+
 # Close the serial port
 myArduino.closeSerialPort()
