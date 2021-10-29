@@ -12,6 +12,11 @@ myArduino.openSerialPort()
 servoAngle_EE_closed = 60
 servoAngle_EE_open = 90
 
+# Initializing Servo Angles
+servoAngle_q1 = 90
+servoAngle_q2 = 90
+servoAngle_q3 = 90
+
 # Creating Instance of RoboticArm
 myVirtualRobotArm = EEZYbotARM_Mk2(
     initial_q1=0, initial_q2=90, initial_q3=-135)
@@ -20,7 +25,6 @@ myVirtualRobotArm = EEZYbotARM_Mk2(
 def GoToMainHomePosition(speed):
     # Initialise kinematic model with initial joint angles (home position)
     # Define end effector open and closed angle
-
     # Calculate the current servo angles
     servoAngle_q1, servoAngle_q2, servoAngle_q3 = myVirtualRobotArm.map_kinematicsToServoAngles(q1=0,
                                                                                                 q2=90,
@@ -41,15 +45,27 @@ def EndEffector(Close_angle, Open_angle, speed):
     # Define end effector open and closed angle
     if Close_angle >= 60:
         # Send the movement command to the arduino. The physical EEZYbotARM will move to this position
-        myArduino.communicate(data=myArduino.composeMessage(servoAngle_EE=Close_angle,
+        myArduino.communicate(data=myArduino.composeMessage(servoAngle_q1=servoAngle_q1,
+                                                            servoTime1=speed,
+                                                            servoAngle_q2=servoAngle_q2,
+                                                            servoTime2=speed,
+                                                            servoAngle_q3=servoAngle_q3,
+                                                            servoTime3=speed,
+                                                            servoAngle_EE=Close_angle,
                                                             servoTime_EE=speed))
     if Open_angle > 60:
         # Send the movement command to the arduino. The physical EEZYbotARM will move to this position
-        myArduino.communicate(data=myArduino.composeMessage(servoAngle_EE=Open_angle,
+        myArduino.communicate(data=myArduino.composeMessage(servoAngle_q1=servoAngle_q1,
+                                                            servoTime1=speed,
+                                                            servoAngle_q2=servoAngle_q2,
+                                                            servoTime2=speed,
+                                                            servoAngle_q3=servoAngle_q3,
+                                                            servoTime3=speed,
+                                                            servoAngle_EE=Open_angle,
                                                             servoTime_EE=speed))
 
-
 def GoToXyZ(x, y, z, speed):
+    global servoAngle_q1, servoAngle_q2, servoAngle_q3
     # speed measured in degree per sec
     # xyz measured in mm
     # Approximate MainHome Position x=192 y=136 z=122
