@@ -7,8 +7,8 @@ runCount = 0
 x_value = 190
 y_value = 0
 z_value = 120
-ee_value = 100
-
+ee_value = 130
+speed = 3000
 
 def RunXYZ(x, y, z):
     speed = 3000
@@ -23,7 +23,7 @@ def RunEE(angle, speed):
 
 
 def on_press_reaction(event):
-    global x_value, y_value, z_value, ee_value
+    global x_value, y_value, z_value, ee_value, speed
     if event.name == 'q':
         x_value += 1
     if event.name == 'w':
@@ -44,10 +44,11 @@ def on_press_reaction(event):
         speed = 3000
         RunEE(ee_value, speed)
     if event.name == 'c':
-        ee_value = 95
+        ee_value = 100
         speed = 3000
         RunEE(ee_value, speed)
-    if event.name == 'esc':
+    if event.name == '-':
+        MyRoboticArm.GoToMainHomePosition(speed)
         exit()
 
     print("\n\nx_value = ", x_value)
