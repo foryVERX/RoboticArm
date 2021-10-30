@@ -85,7 +85,9 @@ class RoboticArm:
                                                                       servoAngle_q2=self.servoAngle_q2,
                                                                       servoTime2=speed,
                                                                       servoAngle_q3=self.servoAngle_q3,
-                                                                      servoTime3=speed))
+                                                                      servoTime3=speed,
+                                                                      servoAngle_EE=self.Last_servoAngle_EE,
+                                                                      servoTimeEE=speed))
         self.last_servoAngle_q1 = self.servoAngle_q1
         self.last_servoAngle_q2 = self.servoAngle_q2
         self.last_servoAngle_q3 = self.servoAngle_q3
