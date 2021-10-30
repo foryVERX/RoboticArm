@@ -89,7 +89,7 @@ class RoboticArm:
 
     def SuddenMovementCorrection(self):
         # This function is called at the start of the first robot command to solve sudden move.
-        self.GoToMainHomePosition(0)
+        self.GoToMainHomePosition(250)
 
     # Almost Home Position x= 190, y=0 , z=120
     # Limit x= 350, y=NA , z=0 .. Y not possible to change
