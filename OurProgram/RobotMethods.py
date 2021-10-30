@@ -89,8 +89,5 @@ def SuddenMovementCorrection():
 # Almost Home Position x= 190, y=0 , z=120
 # Limit x= 350, y=NA , z=0 .. Y not possible to change
 
-GoToXyZ(190, -120, 80, 1000)
-GoToMainHomePosition(1000)
-
 # Close the serial port
 myArduino.closeSerialPort()
