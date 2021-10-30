@@ -8,15 +8,12 @@ from easyEEZYbotARM.serial_communication import arduinoController
 myArduino = arduinoController(port="COM3")
 myArduino.openSerialPort()
 
-# Variables
-servoAngle_EE_closed = 60
-servoAngle_EE_open = 120
 
 # Initializing Servo Angles
 servoAngle_q1 = 90
 servoAngle_q2 = 90
 servoAngle_q3 = 90
-servoAngle_EE = 90
+Last_servoAngle_EE = 100  # Default Open Value
 
 # Creating Instance of RoboticArm
 myVirtualRobotArm = EEZYbotARM_Mk2(
@@ -38,22 +35,27 @@ def GoToMainHomePosition(speed):
                                                         servoTime2=speed,
                                                         servoAngle_q3=servoAngle_q3,
                                                         servoTime3=speed,
-                                                        servoAngle_EE=servoAngle_EE))
+                                                        servoAngle_EE=Last_servoAngle_EE))
 
 
 def EndEffector(angle, speed):
-    global servoAngle_EE
+    global Last_servoAngle_EE
     # Initialise kinematic model with initial joint angles (home position)
     # Send the movement command to the arduino. The physical EEZYbotARM will move to this position
-    myArduino.communicate(data=myArduino.composeMessage(servoAngle_q1=servoAngle_q1,
-                                                        servoTime1=speed,
-                                                        servoAngle_q2=servoAngle_q2,
-                                                        servoTime2=speed,
-                                                        servoAngle_q3=servoAngle_q3,
-                                                        servoTime3=speed,
-                                                        servoAngle_EE=angle,
-                                                        servoTime_EE=speed))
-    servoAngle_EE = angle
+    if angle > 140:
+        GoToMainHomePosition(3000)
+        raise ValueError('End Effector cannot accept angle > 140 if so will full open the gears')
+    else:
+        myArduino.communicate(data=myArduino.composeMessage(servoAngle_q1=servoAngle_q1,
+                                                            servoTime1=speed,
+                                                            servoAngle_q2=servoAngle_q2,
+                                                            servoTime2=speed,
+                                                            servoAngle_q3=servoAngle_q3,
+                                                            servoTime3=speed,
+                                                            servoAngle_EE=angle,
+                                                            servoTime_EE=speed))
+    # Save the angle value
+    Last_servoAngle_EE = angle
 
 def GoToXyZ(x, y, z, speed):
     global servoAngle_q1, servoAngle_q2, servoAngle_q3
@@ -79,9 +81,14 @@ def GoToXyZ(x, y, z, speed):
                                                         servoTime3=speed))
 
 
+def SuddenMovementCorrection():
+    # This function is called at the start of the first robot command to solve sudden move.
+    GoToMainHomePosition(0)
+
+
 # Almost Home Position x= 190, y=0 , z=120
 # Limit x= 350, y=NA , z=0 .. Y not possible to change
-GoToMainHomePosition(0)
+
 GoToXyZ(190, -120, 80, 1000)
 GoToMainHomePosition(1000)
 
