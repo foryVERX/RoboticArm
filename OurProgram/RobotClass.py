@@ -15,7 +15,7 @@ class RoboticArm:
         self.servoAngle_q1 = 90
         self.servoAngle_q2 = 90
         self.servoAngle_q3 = 90
-        self.Last_servoAngle_EE = 100  # Default Open Value
+        self.Last_servoAngle_EE = 130  # Default Open Value
 
         # Save Servo angles
         self.last_servoAngle_q1 = 90
@@ -86,6 +86,9 @@ class RoboticArm:
                                                                       servoTime2=speed,
                                                                       servoAngle_q3=self.servoAngle_q3,
                                                                       servoTime3=speed))
+        self.last_servoAngle_q1 = self.servoAngle_q1
+        self.last_servoAngle_q2 = self.servoAngle_q2
+        self.last_servoAngle_q3 = self.servoAngle_q3
 
     def SuddenMovementCorrection(self):
         # This function is called at the start of the first robot command to solve sudden move.
