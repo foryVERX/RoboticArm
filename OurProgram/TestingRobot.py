@@ -38,14 +38,17 @@ def on_press_reaction(event):
         z_value -= 1
     if event.name == 'enter':
         RunXYZ(x_value, y_value, z_value)
+        print("\n Robotic Arm Moving")
     if event.name == 'o':
-        ee_value = 100
+        ee_value = 130
         speed = 3000
         RunEE(ee_value, speed)
     if event.name == 'c':
-        ee_value = 60
+        ee_value = 95
         speed = 3000
         RunEE(ee_value, speed)
+    if event.name == 'esc':
+        exit()
 
     print("\n\nx_value = ", x_value)
     print("y_value = ", y_value)
