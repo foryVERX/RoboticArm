@@ -27,16 +27,16 @@ def GoToMainHomePosition(speed):
     # Initialise kinematic model with initial joint angles (home position)
     # Define end effector open and closed angle
     # Calculate the current servo angles
-    servoAngle_q1, servoAngle_q2, servoAngle_q3 = myVirtualRobotArm.map_kinematicsToServoAngles(q1=0,
-                                                                                                q2=90,
-                                                                                                q3=-135)
-
+    #servoAngle_q1, servoAngle_q2, servoAngle_q3 = myVirtualRobotArm.map_kinematicsToServoAngles(q1=0,
+                                                                                                #q2=90,
+                                                                                                #q3=-135)
+    #print("HomePosAngles Q1={} Q2={} Q3={}", servoAngle_q1, servoAngle_q2, servoAngle_q3)
     # Send the movement command to the arduino. The physical EEZYbotARM will move to this position
-    myArduino.communicate(data=myArduino.composeMessage(servoAngle_q1=servoAngle_q1,
+    myArduino.communicate(data=myArduino.composeMessage(servoAngle_q1=90,
                                                         servoTime1=speed,
-                                                        servoAngle_q2=servoAngle_q2,
+                                                        servoAngle_q2=90,
                                                         servoTime2=speed,
-                                                        servoAngle_q3=servoAngle_q3,
+                                                        servoAngle_q3=90,
                                                         servoTime3=speed,
                                                         servoAngle_EE=servoAngle_EE))
 
