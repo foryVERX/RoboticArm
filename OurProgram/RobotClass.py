@@ -74,16 +74,17 @@ class RoboticArm:
         a1, a2, a3 = self.myVirtualRobotArm.inverseKinematics(x, y, z)
 
         # Calculate the current servo angles
-        servoAngle_q1, servoAngle_q2, servoAngle_q3 = self.myVirtualRobotArm.map_kinematicsToServoAngles(q1=a1,
-                                                                                                         q2=a2,
-                                                                                                         q3=a3)
+        self.servoAngle_q1, self.servoAngle_q2, self.servoAngle_q3 = self.myVirtualRobotArm.map_kinematicsToServoAngles(
+            q1=a1,
+            q2=a2,
+            q3=a3)
 
         # Send the movement command to the arduino. The physical EEZYbotARM will move to this position
-        self.myArduino.communicate(data=self.myArduino.composeMessage(servoAngle_q1=self.last_servoAngle_q1,
+        self.myArduino.communicate(data=self.myArduino.composeMessage(servoAngle_q1=self.servoAngle_q1,
                                                                       servoTime1=speed,
-                                                                      servoAngle_q2=self.last_servoAngle_q2,
+                                                                      servoAngle_q2=self.servoAngle_q2,
                                                                       servoTime2=speed,
-                                                                      servoAngle_q3=self.last_servoAngle_q3,
+                                                                      servoAngle_q3=self.servoAngle_q3,
                                                                       servoTime3=speed))
 
     def SuddenMovementCorrection(self):
