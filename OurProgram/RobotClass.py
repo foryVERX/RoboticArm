@@ -96,7 +96,7 @@ class RoboticArm:
         # This function is called at the start of the first robot command to solve sudden move.
         self.GoToMainHomePosition(250)
 
-    # Almost Home Position x= 190, y=0 , z=120
+    # Almost Home Position x= 190.945, y=0 , z=123.05
     # Limit x= 350, y=NA , z=0 .. Y not possible to change
 
     # Close the serial port
