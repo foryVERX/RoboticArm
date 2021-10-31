@@ -45,11 +45,12 @@ class arduinoController:
     # Class attributes
     startMarker = 60  # unicode character '<'
     endMarker = 62  # unicode character '>'
-    servoTime1 = 1000  # default times of servo movement
-    servoTime2 = 1000
-    servoTime3 = 1000
-    servoTimeEE = 500
-    msg = "<BUZZ,90,90,90,90,1000,1000,1000,1000>"  # default message
+    servoTime1 = 3000  # default times of servo movement
+    servoTime2 = 3000
+    servoTime3 = 3000
+    servoTimeEE = 3000
+
+    # msg = "<BUZZ,90,90,90,90,1000,1000,1000,1000>"  # default message
 
     # Initializer / Instance attributes
 
@@ -217,7 +218,7 @@ class arduinoController:
 
         return message
 
-    def communicate(self, data, delay_between_commands=5):
+    def communicate(self, data, delay_between_commands=0):
         """
         --Description--
         Function runs a test to check communications with Arduino!
