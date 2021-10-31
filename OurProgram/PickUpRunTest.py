@@ -46,14 +46,12 @@ def RunEE(angle, speed):
 # y_value =  -187
 # z_value =  118
 
+MyRoboticArm.SuddenMovementCorrection()
+MyRoboticArm.GoToMainHomePosition(3000)
 RunEE(130, 5000)
-GoToPickPos(4000)
-time.sleep(1)
-RunEE(100, 5000)
+GoToPickPos(3000)
 RunEE(80, 5000)
 RunEE(63, 5000)
-time.sleep(1)
 GoToDstPos(400)
-time.sleep(1)
 RunEE(80, 5000)
 RunEE(130, 5000)
