@@ -36,7 +36,7 @@
 // include these libraries for using the servo add on board. Taken from servo example code
 #include <Arduino.h>
 // include this library for servo easing functionality
-#include <ServoEasing.h>
+#include <ServoEasing.hpp>
 
 
 

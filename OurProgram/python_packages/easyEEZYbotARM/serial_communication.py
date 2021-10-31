@@ -45,10 +45,10 @@ class arduinoController:
     # Class attributes
     startMarker = 60  # unicode character '<'
     endMarker = 62  # unicode character '>'
-    servoTime1 = 3000  # default times of servo movement
-    servoTime2 = 3000
-    servoTime3 = 3000
-    servoTimeEE = 3000
+    servoTime1 = 10000  # default times of servo movement
+    servoTime2 = 10000
+    servoTime3 = 10000
+    servoTimeEE = 10000
 
     # msg = "<BUZZ,90,90,90,90,1000,1000,1000,1000>"  # default message
 
