@@ -50,11 +50,11 @@ class arduinoController:
     servoTime3 = 3000
     servoTimeEE = 3000
 
-    # msg = "<BUZZ,90,90,90,90,1000,1000,1000,1000>"  # default message
+    msg = "<BUZZ,90,90,90,90,3000,3000,3000,3000>"  # default message
 
     # Initializer / Instance attributes
 
-    def __init__(self, port="COM18"):
+    def __init__(self, port="COM3"):
         self.port = port
 
     # Include function here connect and pass joint angle
@@ -100,7 +100,7 @@ class arduinoController:
 
         """
         if port is None:
-            port = self.port
+            port = "COM3"
 
         self.serialPort = serial.Serial(port=self.port, baudrate=baudRate)
         print("Serial port " + port + " opened  Baudrate " + str(baudRate))
@@ -143,6 +143,7 @@ class arduinoController:
             myString = self.msg
 
         self.serialPort.write(myString.encode('utf-8'))  # encode as unicode
+        print("Yousef Debugging: Writing To Serial: ", myString.encode('utf-8'))
 
     def recvFromArduino(self):
         """
@@ -174,7 +175,7 @@ class arduinoController:
 
         return (msg)
 
-    def composeMessage(self, servoAngle_q1, servoAngle_q2, servoAngle_q3, servoAngle_EE=90, instruction="BUZZ",
+    def composeMessage(self, servoAngle_q1, servoAngle_q2, servoAngle_q3, servoAngle_EE, instruction="BUZZ",
                        **kwargs):
         """
         --Description--

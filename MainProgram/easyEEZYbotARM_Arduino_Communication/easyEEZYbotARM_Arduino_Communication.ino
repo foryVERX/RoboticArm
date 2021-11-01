@@ -57,7 +57,7 @@ const int SERVO0_PIN = 0; //servo pin for end effector
 * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 //-------- Variables for receiving serial data -------------
-const byte buffSize = 40;
+const byte buffSize = 48;
 char inputBuffer[buffSize];
 const char startMarker = '<';
 const char endMarker = '>';
@@ -71,7 +71,7 @@ unsigned long curMillis; // Variable for current time
 //unsigned long general_timer;
 
 // -------- Variables to hold the parsed data -------------
-float floatFromPC0 = 90.0; // initial values are mid range for joint angles
+float floatFromPC0 = 130.0; // initial values are mid range for joint angles
 float floatFromPC1 = 90.0;
 float floatFromPC2 = 90.0;
 float floatFromPC3 = 90.0;
@@ -81,8 +81,10 @@ int intFromPC2 = 3000;
 int intFromPC3 = 3000;
 float last_servoAngle_q1 = floatFromPC1; // initial values are mid range for joint angles
 float last_servoAngle_q2 = floatFromPC2;
-float last_servoAngle_q3 = intFromPC3;
+//float last_servoAngle_q3 = intFromPC3;
+float last_servoAngle_q3 = floatFromPC3;
 float last_servoAngle_EE = floatFromPC0;
+
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
   Instatiate clasess for libraries                                               *
@@ -127,14 +129,16 @@ void setup() {
   Servo2.setEasingType(EASE_CUBIC_IN_OUT);
   Servo3.setEasingType(EASE_CUBIC_IN_OUT);
   Servo0.setEasingType(EASE_CUBIC_IN_OUT); // end effector
+
+  
   
   Servo1.write(last_servoAngle_q1);
   Servo2.write(last_servoAngle_q2);
   Servo3.write(last_servoAngle_q3);
-  Servo0.write(last_servoAngle_EE); // end effector
+  Servo0.write(130); // end effector
 
   // Just wait for servos to reach position
-  delay(500); // delay() is OK in setup as it only happens once
+  delay(5000); // delay() is OK in setup as it only happens once
 
   // tell the PC we are ready
   Serial.println("<Arduino is ready>");
@@ -203,6 +207,12 @@ void actionInstructionsFromPC() {
   float servoAngle_q3 = floatFromPC3;
   float servoAngle_EE = floatFromPC0;
   // -- joint speeds
+  // Manually put speed since there is unsolved bug
+  //   int servoTime_q1 = intFromPC1;
+  // int servoTime_q2 = intFromPC2;
+  //int servoTime_q3 = intFromPC3;
+  //int servoTime_EE = intFromPC0;
+  
   int servoTime_q1 = intFromPC1;
   int servoTime_q2 = intFromPC2;
   int servoTime_q3 = intFromPC3;
