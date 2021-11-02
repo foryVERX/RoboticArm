@@ -1,7 +1,7 @@
 import serial
 import time
 
-ser = serial.Serial('COM9', baudrate=9600, timeout=1)
+ser = serial.Serial('COM4', baudrate=9600, timeout=1)
 
 
 # Write g to Arduino, which starts the DAQ for IR sensor.
@@ -58,6 +58,7 @@ def get_cs_output(samples):
 # Best value of samples found to be 3
 def filter_colors(samples):
     cs_data = get_cs_output(samples)
+    print("test: ", cs_data)
     start = cs_data.find("R") + len("R")
     end = cs_data.find("G")
     red = int(cs_data[start:end])
@@ -77,6 +78,9 @@ def filter_colors(samples):
         return color
 
 
-print(filter_colors(3))
+while True:
+    print(get_cs_output(5))
+    print(get_ir_output(10, 0.001))
 
-ser.close()
+# print(get_ir_output(10, 0.25))
+# ser.close()

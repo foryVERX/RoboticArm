@@ -53,7 +53,7 @@ class arduinoController:
 
     # Initializer / Instance attributes
 
-    def __init__(self, port="COM3"):
+    def __init__(self, port="COM4"):
         self.port = port
 
     # Include function here connect and pass joint angle

@@ -1,6 +1,6 @@
 from OurProgram.RobotClass import *
 import time
-import keyboard
+
 
 MyRoboticArm = RoboticArm()
 

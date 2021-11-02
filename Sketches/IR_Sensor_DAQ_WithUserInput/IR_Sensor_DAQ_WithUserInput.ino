@@ -1,4 +1,4 @@
-int digitalPin = 8;
+int digitalPin = 9;
 int data = 0;
 char userInput;
 
@@ -21,6 +21,3 @@ if(Serial.available()> 0){
       } // if user input 'g'
   } // Serial.available
 } // Void Loop
-
-
-
