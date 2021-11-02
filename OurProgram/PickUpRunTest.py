@@ -1,4 +1,5 @@
 from OurProgram.RobotClass import *
+import time
 import keyboard
 
 MyRoboticArm = RoboticArm()
@@ -19,9 +20,13 @@ MyRoboticArm = RoboticArm()
 
 
 def GoToPickPos(speed):
-    x = 260
-    y = -5
-    z = 55
+    x = -5
+    y = 255
+    z = 80
+    MyRoboticArm.GoToXyZ(x, y, z, speed)
+    x = 5
+    y = 265
+    z = 50
     MyRoboticArm.GoToXyZ(x, y, z, speed)
 
 
@@ -37,9 +42,9 @@ def RunEE(angle, speed):
 
 
 # Pick up positions
-# x_value =  260
-# y_value =  -5
-# z_value =  55
+# x_value =  5
+# y_value =  265
+# z_value =  50
 
 # Distination positions
 # x_value =  -70
@@ -48,12 +53,15 @@ def RunEE(angle, speed):
 
 i = 0
 while True:
+    st = time.time()
     if i == 0:
         i += 1
         MyRoboticArm.GoToMainHomePosition(3000)
         #RunEE(130, 3000)
     GoToPickPos(3000)
-    RunEE(80, 3000)
+    RunEE(70, 3000)
     GoToDstPos(2000)
     RunEE(130, 3000)
     GoToPickPos(3000)
+    endt = time.time()
+    print(f"Runtime of the program is {endt - st}")

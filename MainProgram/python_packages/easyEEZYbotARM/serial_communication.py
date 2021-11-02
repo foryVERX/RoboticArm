@@ -53,7 +53,7 @@ class arduinoController:
 
     # Initializer / Instance attributes
 
-    def __init__(self, port="COM18"):
+    def __init__(self, port="COM3"):
         self.port = port
 
     # Include function here connect and pass joint angle
@@ -85,7 +85,7 @@ class arduinoController:
             print("")
 
     # Instance methods
-    def openSerialPort(self, baudRate=9600, port=None):
+    def openSerialPort(self, baudRate=115200, port=None):
         """
         --Description--
         Connects to a serial port using pySerial.
@@ -229,9 +229,11 @@ class arduinoController:
         Function doesn't return a value
 
         """
+        st = time.time()
         # convert data to list if it isn't already a list
         if not isinstance(data, list):
             data = [data]
+
 
         # Declare variables
         numLoops = len(data)
@@ -259,5 +261,6 @@ class arduinoController:
                 waitingForReply = False
 
                 print("===========")
-
-            time.sleep(delay_between_commands)
+                endt = time.time()
+                print(f"Runtime of the Arduino Communication By Yousef is {endt - st}\n")
+        time.sleep(delay_between_commands)

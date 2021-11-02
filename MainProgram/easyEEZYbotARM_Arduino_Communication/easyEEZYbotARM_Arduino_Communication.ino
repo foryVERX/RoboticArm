@@ -110,7 +110,7 @@ void setup() {
   playTone();
 
   //Begin serial communications
-  Serial.begin(9600);
+  Serial.begin(115200);
 
   //Wait for serial communications to start before continuing
   while (!Serial); //delay for Leonardo
@@ -138,7 +138,7 @@ void setup() {
   Servo0.write(130); // end effector
 
   // Just wait for servos to reach position
-  delay(5000); // delay() is OK in setup as it only happens once
+  delay(500); // delay() is OK in setup as it only happens once
 
   // tell the PC we are ready
   Serial.println("<Arduino is ready>");
@@ -182,9 +182,6 @@ void loop() {
 
 void blinkLED() {
   digitalWrite(LED_BUILTIN, HIGH);
-  delay(100);
-  digitalWrite(LED_BUILTIN, LOW);
-  delay(100);
 }
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -192,7 +189,7 @@ void blinkLED() {
 //~~~~~~~~~~~~~Fuction: Play Buzzer Tone~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 void playTone() {
-  tone(BUZZER_PIN, 650, 300);
+  //tone(BUZZER_PIN, 650, 300);
 }
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -392,15 +389,15 @@ void processMessageFromPC() {
   // strcmp compares two strings and returns zero if the strings are equal
 
   if (strcmp(messageFromPC, "LED") == 0) {
-    blinkLED();
+    //blinkLED();
   }
 
   if (strcmp(messageFromPC, "BUZZ") == 0) {
-    playTone();
+    //playTone();
   }
 
   if (strcmp(messageFromPC, "BUZZ") == 0) {
-    playTone();
+    //playTone();
   }
 
 

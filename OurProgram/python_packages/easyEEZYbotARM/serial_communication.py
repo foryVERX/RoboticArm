@@ -86,7 +86,7 @@ class arduinoController:
             print("")
 
     # Instance methods
-    def openSerialPort(self, baudRate=9600, port=None):
+    def openSerialPort(self, baudRate=57600, port=None):
         """
         --Description--
         Connects to a serial port using pySerial.

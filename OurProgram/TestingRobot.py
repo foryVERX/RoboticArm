@@ -8,10 +8,10 @@ x_value = 190
 y_value = 0
 z_value = 120
 ee_value = 130
-speed = 4000
+speed = 3000
 
 def RunXYZ(x, y, z):
-    speed = 5000
+    speed = 3000
     x = int(x)
     y = int(y)
     z = int(z)
@@ -41,11 +41,11 @@ def on_press_reaction(event):
         print("\n Robotic Arm Moving")
     if event.name == 'o':
         ee_value = 130
-        speed = 4000
+        speed = 3000
         RunEE(ee_value, speed)
     if event.name == 'c':
-        ee_value = 63
-        speed = 6000
+        ee_value = 80
+        speed = 3000
         RunEE(ee_value, speed)
     if event.name == '-':
         MyRoboticArm.GoToMainHomePosition(speed)
@@ -57,9 +57,10 @@ def on_press_reaction(event):
     print("ee_value = ", ee_value)
 
 # Pick up positions
-# x_value =  260
-# y_value =  -5
-# z_value =  55
+# x_value =  5
+# y_value =  265
+# z_value =  50
+
 
 # Distination positions
 # x_value =  -70

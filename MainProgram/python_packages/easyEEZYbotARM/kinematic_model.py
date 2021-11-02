@@ -17,7 +17,7 @@
 # ------------------------------------------#
 # Imports                                   #
 # ------------------------------------------#
-
+import time
 from math import *  # for maths
 import matplotlib.pyplot as plt  # for plotting
 from mpl_toolkits.mplot3d import Axes3D  # for 3D plotting
@@ -308,6 +308,7 @@ class EEZYbotARM:
         q1, q2, q3 -> Corresponding joint angles in degrees
 
         """
+
         # DH parameters (Proximal Convention)
         L1 = self.L1
         L2 = self.L2
