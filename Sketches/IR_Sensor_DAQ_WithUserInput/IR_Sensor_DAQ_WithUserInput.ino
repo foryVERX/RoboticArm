@@ -1,5 +1,5 @@
-int digitalPin = 9;
-int data = 0;
+int digitalPinIR = 8;
+int IrData = 0;
 char userInput;
 
 void setup(){

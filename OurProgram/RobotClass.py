@@ -71,14 +71,17 @@ class RoboticArm:
         # Assign new cartesian position where we want the robot arm end effector to move to
         # (x,y,z in mm from centre of robot base)
         # Compute inverse kinematics
-        st = time.time()
+
         a1, a2, a3 = self.myVirtualRobotArm.inverseKinematics(x, y, z)
 
+        st = time.time()
         # Calculate the current servo angles
         self.servoAngle_q1, self.servoAngle_q2, self.servoAngle_q3 = self.myVirtualRobotArm.map_kinematicsToServoAngles(
             q1=a1,
             q2=a2,
             q3=a3)
+
+
 
         # Send the movement command to the arduino. The physical EEZYbotARM will move to this position
         self.myArduino.communicate(data=self.myArduino.composeMessage(servoAngle_q1=self.servoAngle_q1,
@@ -89,11 +92,12 @@ class RoboticArm:
                                                                       servoTime3=speed,
                                                                       servoAngle_EE=self.Last_servoAngle_EE,
                                                                       servoTimeEE=speed))
+        endt = time.time()
+        print(f"Runtime of the inverseKinematics By Yousef is {endt - st}\n")
         self.last_servoAngle_q1 = self.servoAngle_q1
         self.last_servoAngle_q2 = self.servoAngle_q2
         self.last_servoAngle_q3 = self.servoAngle_q3
-        endt = time.time()
-        print(f"Runtime of the inverseKinematics By Yousef is {endt - st}\n")
+
 
     def SuddenMovementCorrection(self):
         # This function is called at the start of the first robot command to solve sudden move.

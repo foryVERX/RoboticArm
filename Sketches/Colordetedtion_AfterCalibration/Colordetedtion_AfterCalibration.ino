@@ -9,7 +9,7 @@
 // Calibration Values
 // Get these from Calibration Sketch
 
-char userInput; // user input value
+String userInput; // user input value
 int redMin = 30; // Red minimum value
 int redMax = 492; // Red maximum value
 int greenMin = 30; // Green minimum value
@@ -41,7 +41,9 @@ void setup() {
   pinMode(S1, OUTPUT);
   pinMode(S2, OUTPUT);
   pinMode(S3, OUTPUT);
-  
+
+  // Function to clear the buffer
+  serial_flush();
   // Set Sensor output as input
   pinMode(sensorOut, INPUT);
   
@@ -62,36 +64,38 @@ void loop() {
 
 int outputToSerialPort() {
     if(Serial.available()> 0){
-    userInput = Serial.read();               // read user input
-      if(userInput == 'c'){
+    userInput = Serial.readStringUntil('\n');               // read user input
+      if(userInput == "c"){
           // Read Red value
     redPW = getRedPW();
     // Map to value from 0-255
     redValue = map(redPW, redMin,redMax,255,0);
     // Delay to stabilize sensor
-    delay(100);
+    delay(0.1);
     
     // Read Green value
     greenPW = getGreenPW();
     // Map to value from 0-255
     greenValue = map(greenPW, greenMin,greenMax,255,0);
     // Delay to stabilize sensor
-    delay(100);
+    delay(0.1);
     
     // Read Blue value
     bluePW = getBluePW();
     // Map to value from 0-255
     blueValue = map(bluePW, blueMin,blueMax,255,0);
     // Delay to stabilize sensor
-    delay(100);
-    // Print output to Serial Monitor   
-
+    delay(0.1);
+    // Print output to Serial Monitor  
     Serial.print("R");
     Serial.print(redValue);
     Serial.print("G");
     Serial.print(greenValue);
     Serial.print("B");
     Serial.print(blueValue);
+    //Serial.flush();
+    serial_flush();
+
       }
   }
 }
@@ -138,4 +142,8 @@ int getBluePW() {
   PW = pulseIn(sensorOut, LOW);
   // Return the value
   return PW;
+}
+
+void serial_flush(void) {
+  while (Serial.available()) Serial.read();
 }
