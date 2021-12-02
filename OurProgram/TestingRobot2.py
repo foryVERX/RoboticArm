@@ -19,26 +19,8 @@ MyRoboticArm = RoboticArm()
 # z_value =  118
 
 
-def GoToPickPos(speed):
-    x = 27
-    y = 220
-    z = 80
+def GoToPos(x, y, z, speed):
     MyRoboticArm.GoToXyZ(x, y, z, speed)
-    x = 27
-    y = 230
-    z = 35
-    MyRoboticArm.GoToXyZ(x, y, z, speed)
-
-
-def GoToDstPos(speed):
-    x = -70
-    y = -187
-    z = 118
-    MyRoboticArm.GoToXyZ(x, y, z, speed)
-
-
-def RunEE(angle, speed):
-    MyRoboticArm.EndEffector(angle, speed)
 
 
 # Pick up positions
@@ -46,24 +28,34 @@ def RunEE(angle, speed):
 # y_value =  220
 # z_value =  35
 
-# Distination positions 1
+# Distination Position 1
+
+# x = 290 or 280
+# y = -80
+# z = 80
+
+# Distination Position 2
+
+# x = 100
+# y = -230
+# z = 80
+
+# Distination positions 3
 # x_value =  -70
 # y_value =  -187
 # z_value =  118
 
-# Distination Position 2
+
+# Almost Home Position x= 190.945, y=0 , z=123.05
 
 i = 0
 while True:
     st = time.time()
-    if i == 0:
-        i += 1
-        MyRoboticArm.GoToMainHomePosition(3000)
-        #RunEE(130, 3000)
-    GoToPickPos(3000)
-    RunEE(70, 3000)
-    GoToDstPos(2000)
-    RunEE(130, 3000)
-    GoToPickPos(3000)
+    MyRoboticArm.GoToMainHomePosition(3000)
+    x = int(input("X = "))
+    y = int(input("Y = "))
+    z = int(input("Z = "))
+    speed = 3000
+    GoToPos(x,y,z,speed)
     endt = time.time()
     print(f"Runtime of the program is {endt - st}")

@@ -57,9 +57,9 @@ def on_press_reaction(event):
     print("ee_value = ", ee_value)
 
 # Pick up positions
-# x_value =  5
-# y_value =  265
-# z_value =  50
+# x_value =  25
+# y_value =  245
+# z_value =  35
 
 
 # Distination positions
