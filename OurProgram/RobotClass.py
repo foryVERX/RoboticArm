@@ -7,7 +7,7 @@ from easyEEZYbotARM.serial_communication import arduinoController
 
 # Insert your Arduino serial port here to initialise the arduino controller
 class RoboticArm:
-    myArduino = arduinoController(port="COM3")
+    myArduino = arduinoController(port="COM4")
     myArduino.openSerialPort()
 
     def __init__(self):

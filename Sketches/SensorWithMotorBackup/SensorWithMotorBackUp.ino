@@ -1,18 +1,14 @@
-// Define color sensor pins
+// For IR SENSOR
+int digitalPinIR = 9;
+int IrData = 0;
 
+// Collor Sensor
 #define S0 4
 #define S1 5
 #define S2 6
 #define S3 7
 #define sensorOut 8
-
-// IR SENSOR Variables
-int digitalPin = 9;
-int data = 0;
-char userInput;
-
-// Calibration Values
-// Get these from Calibration Sketch
+String userInput; // user input value
 int redMin = 30; // Red minimum value
 int redMax = 492; // Red maximum value
 int greenMin = 30; // Green minimum value
@@ -38,13 +34,17 @@ int blueValue;
 
 
 void setup() {
-
-  // Set S0 - S3 as outputs
+  
+  // initialize digital pin 13 as an output.
+  pinMode(13, OUTPUT);
+    // Set S0 - S3 as outputs
   pinMode(S0, OUTPUT);
   pinMode(S1, OUTPUT);
   pinMode(S2, OUTPUT);
   pinMode(S3, OUTPUT);
-  
+
+  // Function to clear the buffer
+  serial_flush();
   // Set Sensor output as input
   pinMode(sensorOut, INPUT);
   
@@ -57,58 +57,59 @@ void setup() {
 }
 
 void loop() {
-    //userInput = Serial.read();        
-  // Only  request data if requested by user
-      if(Serial.available()> 0){
-    userInput = Serial.read();               // read user input
-
-      if(userInput == 'g'){                  // if we get expected value
-
-            data = digitalRead(digitalPin);    // read the input pin
-            Serial.println(data);
-
-      } // if user input 'g'
-  } // Serial.available
-  outputToSerialPort();
+  IrData = digitalRead(digitalPinIR);
+  IrData = 1 - IrData;
+  if (IrData == 0){
+    i=0;
+    digitalWrite(13, HIGH);
+  }
+  else{
+  digitalWrite(13, LOW);
+  if(Serial.available()>0){
+    userInput = Serial.readStringUntil('\n');
+    if(userInput == "c"){
+      outputCsToSerialPort();
+      outputCsToSerialPort();
+      outputCsToSerialPort();
+    }
+  }
+    }
 }
 
-
-int outputToSerialPort() {
-  
-    if(Serial.available()> 0){
-    userInput = Serial.read();               // read user input
-      if(userInput == 'c'){
-          // Read Red value
+int outputCsToSerialPort() {
+    // Read Red value
+    
     redPW = getRedPW();
     // Map to value from 0-255
     redValue = map(redPW, redMin,redMax,255,0);
     // Delay to stabilize sensor
-    delay(0.25);
+    delay(200);
     
     // Read Green value
     greenPW = getGreenPW();
     // Map to value from 0-255
     greenValue = map(greenPW, greenMin,greenMax,255,0);
     // Delay to stabilize sensor
-    delay(0.25);
+    delay(200);
     
     // Read Blue value
     bluePW = getBluePW();
     // Map to value from 0-255
     blueValue = map(bluePW, blueMin,blueMax,255,0);
     // Delay to stabilize sensor
-    delay(0.25);
-    // Print output to Serial Monitor   
-
+    delay(200);
+    // Print output to Serial Monitor
     Serial.print("R");
     Serial.print(redValue);
     Serial.print("G");
     Serial.print(greenValue);
     Serial.print("B");
     Serial.print(blueValue);
-      }
-  }
+    delay(100);
+    //serial_flush();
+
 }
+      
 // Function to read Red Pulse Widths
 int getRedPW() {
 
@@ -126,7 +127,6 @@ int getRedPW() {
 
 // Function to read Green Pulse Widths
 int getGreenPW() {
-
   // Set sensor to read Green only
   digitalWrite(S2,HIGH);
   digitalWrite(S3,HIGH);
@@ -136,7 +136,6 @@ int getGreenPW() {
   PW = pulseIn(sensorOut, LOW);
   // Return the value
   return PW;
-
 }
 
 
@@ -152,4 +151,8 @@ int getBluePW() {
   PW = pulseIn(sensorOut, LOW);
   // Return the value
   return PW;
+}
+
+void serial_flush(void) {
+  while (Serial.available()) Serial.read();
 }
