@@ -57,7 +57,7 @@ const int SERVO0_PIN = 0; //servo pin for end effector
 * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 //-------- Variables for receiving serial data -------------
-const byte buffSize = 48;
+const byte buffSize = 50;
 char inputBuffer[buffSize];
 const char startMarker = '<';
 const char endMarker = '>';
@@ -75,10 +75,10 @@ float floatFromPC0 = 130.0; // initial values are mid range for joint angles
 float floatFromPC1 = 90.0;
 float floatFromPC2 = 90.0;
 float floatFromPC3 = 90.0;
-int intFromPC0 = 3000; // inital values are acceptable movement times
-int intFromPC1 = 3000;
-int intFromPC2 = 3000;
-int intFromPC3 = 3000;
+int intFromPC0 = 5000; // inital values are acceptable movement times
+int intFromPC1 = 5000;
+int intFromPC2 = 5000;
+int intFromPC3 = 5000;
 float last_servoAngle_q1 = floatFromPC1; // initial values are mid range for joint angles
 float last_servoAngle_q2 = floatFromPC2;
 //float last_servoAngle_q3 = intFromPC3;
