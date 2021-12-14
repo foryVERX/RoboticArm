@@ -14,12 +14,12 @@ int IrData = 0;
 // Get these from Calibration Sketch
 
 String userInput; // user input value
-int redMin = 30; // Red minimum value
-int redMax = 492; // Red maximum value
-int greenMin = 30; // Green minimum value
-int greenMax = 612; // Green maximum value
-int blueMin = 20; // Blue minimum value
-int blueMax = 476; // Blue maximum value
+int redMin = 63;// Red minimum value
+int redMax = 177; // Red maximum value
+int greenMin = 86; // Green minimum value
+int greenMax = 206; // Green maximum value
+int blueMin = 75; // Blue minimum value
+int blueMax = 177; // Blue maximum value
 
 // Define functions
 int outputToSerialPort();
@@ -100,7 +100,7 @@ int outputToSerialPort() {
     Serial.print("G");
     Serial.print(greenValue);
     Serial.print("B");
-    Serial.print(blueValue);
+    Serial.print(blueValue, "\n");
     serial_flush();
       }
       

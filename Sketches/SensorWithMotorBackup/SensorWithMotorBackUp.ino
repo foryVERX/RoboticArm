@@ -1,6 +1,7 @@
 // For IR SENSOR
 int digitalPinIR = 9;
 int IrData = 0;
+int xi;
 
 // Collor Sensor
 #define S0 4
@@ -9,12 +10,12 @@ int IrData = 0;
 #define S3 7
 #define sensorOut 8
 String userInput; // user input value
-int redMin = 30; // Red minimum value
-int redMax = 492; // Red maximum value
-int greenMin = 30; // Green minimum value
-int greenMax = 612; // Green maximum value
-int blueMin = 20; // Blue minimum value
-int blueMax = 476; // Blue maximum value
+int redMin = 63;// Red minimum value
+int redMax = 177; // Red maximum value
+int greenMin = 86; // Green minimum value
+int greenMax = 206; // Green maximum value
+int blueMin = 75; // Blue minimum value
+int blueMax = 177; // Blue maximum value
 
 // Define functions
 int outputToSerialPort();
@@ -34,7 +35,7 @@ int blueValue;
 
 
 void setup() {
-  
+  int xi = 0;
   // initialize digital pin 13 as an output.
   pinMode(13, OUTPUT);
     // Set S0 - S3 as outputs
@@ -60,7 +61,7 @@ void loop() {
   IrData = digitalRead(digitalPinIR);
   IrData = 1 - IrData;
   if (IrData == 0){
-    i=0;
+    serial_flush();
     digitalWrite(13, HIGH);
   }
   else{
@@ -68,15 +69,19 @@ void loop() {
   if(Serial.available()>0){
     userInput = Serial.readStringUntil('\n');
     if(userInput == "c"){
-      outputCsToSerialPort();
-      outputCsToSerialPort();
-      outputCsToSerialPort();
+      xi = 0;
+      outputCsToSerialPort(xi);
+      xi = xi + 1;
+      outputCsToSerialPort(xi);
+      xi = xi + 1;
+      outputCsToSerialPort(xi);
+      xi = xi + 1;  
     }
   }
     }
 }
 
-int outputCsToSerialPort() {
+int outputCsToSerialPort(int xi) {
     // Read Red value
     
     redPW = getRedPW();
@@ -99,13 +104,16 @@ int outputCsToSerialPort() {
     // Delay to stabilize sensor
     delay(200);
     // Print output to Serial Monitor
-    Serial.print("R");
-    Serial.print(redValue);
-    Serial.print("G");
-    Serial.print(greenValue);
-    Serial.print("B");
-    Serial.print(blueValue);
-    delay(100);
+    if (xi == 2){
+      Serial.print("R");
+      Serial.print(redValue);
+      Serial.print("G");
+      Serial.print(greenValue);
+      Serial.print("B");
+      Serial.print(blueValue);
+      Serial.println();
+      delay(100);
+    }
     //serial_flush();
 
 }

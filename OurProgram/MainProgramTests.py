@@ -1,9 +1,14 @@
 from OurProgram.RobotClass import *
 import time
-from SensorsMethods.SensorsDAQ_Slow import get_color
+
 import serial
 
+ser = serial.Serial('COM4', baudrate=9600, timeout=1)
+
 MyRoboticArm = RoboticArm()
+
+
+# MyRoboticArm.GoToMainHomePosition(3000)
 
 # Pick up positions
 # x_value =  -100
@@ -12,7 +17,7 @@ MyRoboticArm = RoboticArm()
 def GoToPickPos(speed):
     x = -100
     y = 200
-    z = 280
+    z = 200
     MyRoboticArm.GoToXyZ(x, y, z, speed)
     x = -100
     y = 200
@@ -75,24 +80,61 @@ def GoToDstBLUE(speed):
 def RunEE(angle, speed):
     MyRoboticArm.EndEffector(angle, speed)
 
+
+def get_cs_values():
+    ser.write(b'c')
+    time.sleep(2)
+    # csData = ser.readline().decode('utf').rstrip('\n')
+    csData = recvFromArduino()
+    return csData
+
+def recvFromArduino():
+    pass
+
+def get_color():
+    start = cs_data.find("R") + len("R")
+    end = cs_data.find("G")
+    red = str(cs_data[start:end])
+    start = cs_data.find("G") + len("G")
+    end = cs_data.find("B")
+    green = str(cs_data[start:end])
+    start = cs_data.find("B") + len("B")
+    blue = str(cs_data[start:])
+    if red > green and red > blue:
+        color = "RED"
+        return color
+    elif green > blue:
+        color = "GREEN"
+        return color
+    else:
+        color = "BLUE"
+        return color
+
 i = 0
 while True:
     if i == 0:
         MyRoboticArm.GoToMainHomePosition(5000)
         RunEE(120, 5000)
         i = 1
-    get_color()
-    COLOR, IR = get_color()
-    if IR == 0:
-        print("IR = ", IR)
-        print("COLOR: ", COLOR)
-    if IR == 1:
+    cs_data = get_cs_values()
+    print("Color Data", cs_data)
+    time.sleep(2)
+    if len(cs_data) == 0:
+        ir = 0
+        MyRoboticArm.GoToMainHomePosition(5000)
+    else:
+        ir = 1
+        color = get_color()
         GoToPickPos(5000)
-        print("IR = ", IR)
-        print("COLOR: ", COLOR)
-        if COLOR == "RED":
+        print("ir = ", ir)
+        print("color is ", color)
+        time.sleep(2)
+        if color == "RED":
             GoToDstRED(5000)
-        if COLOR == "GREEN":
+        if color == "GREEN":
             GoToDstGRN(5000)
-        if COLOR == "BLUE":
-            GoToDstBLUE(5000)
+        if color == "BLUE":
+            GoToDstGRN(5000)
+
+
+    # if data vailable robotic arm pick
