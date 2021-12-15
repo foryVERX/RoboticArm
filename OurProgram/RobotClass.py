@@ -38,11 +38,11 @@ class RoboticArm:
         # q3=-135)
         # print("HomePosAngles Q1={} Q2={} Q3={}", servoAngle_q1, servoAngle_q2, servoAngle_q3)
         # Send the movement command to the arduino. The physical EEZYbotARM will move to this position
-        self.myArduino.communicate(data=self.myArduino.composeMessage(servoAngle_q1=90,
+        self.myArduino.communicate(data=self.myArduino.composeMessage(servoAngle_q1=95,
                                                                       servoTime1=speed,
-                                                                      servoAngle_q2=90,
+                                                                      servoAngle_q2=95,
                                                                       servoTime2=speed,
-                                                                      servoAngle_q3=90,
+                                                                      servoAngle_q3=95,
                                                                       servoTime3=speed,
                                                                       servoAngle_EE=self.Last_servoAngle_EE))
 
